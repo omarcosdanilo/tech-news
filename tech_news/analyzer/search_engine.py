@@ -18,12 +18,15 @@ def search_by_date(date):
 
         return [(content["title"], content["url"]) for content in news]
     except ValueError:
-        raise ValueError('Data inválida')
+        raise ValueError("Data inválida")
 
 
 # Requisito 8
 def search_by_tag(tag):
-    """Seu código deve vir aqui"""
+    news = search_news(
+        {"tags": {"$elemMatch": {"$regex": f"{tag}", "$options": "i"}}}
+    )
+    return [(content["title"], content["url"]) for content in news]
 
 
 # Requisito 9
